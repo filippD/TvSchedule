@@ -1,0 +1,22 @@
+$icon-width: 20px;
+$header-height: 80px;
+
+.header {
+	height: $header-height;
+	background: #ececec;
+	
+	.back-icon {
+		height: 100%;
+	    width: $icon-width;
+	    padding: 0 10px;
+	    float: left;
+	}
+
+	.logo {
+		font-size: 20px;
+		margin: 0 $icon-width 0 0;
+		vertical-align: middle;
+		line-height: $header-height; 
+	}
+}
+
