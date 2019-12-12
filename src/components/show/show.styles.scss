@@ -1,0 +1,13 @@
+.show {
+	display: flex;
+	justify-content: space-around;
+	padding: 20px;
+
+	.image {
+		width: 80px;
+	}
+
+	.season-episode-info {
+		background: #ececec;
+	}
+}
