@@ -1,8 +1,10 @@
 import React from 'react';
+import moment from 'moment';
+import 'moment/locale/ru';
 
 import './day-schedule.styles.scss';
 
-import { MONTHS_MAP, API_URL } from '../../constants/constants';
+import { API_URL } from '../../constants/constants';
 import { ReactComponent as DownArrowIcon } from '../../assets/icons/down-arrow.svg';
 import { ReactComponent as UpArrowIcon } from '../../assets/icons/up-arrow.svg';
 import Show from '../show/show.component';
@@ -16,16 +18,17 @@ class DaySchedule extends React.Component {
 			loading: false,
 			error: null,
 			limit: 2,
-			canLoadMore: true
+			canLoadMore: false
 		};
 	};
 
 	componentDidMount() {
+		const ISOdate = moment(this.props.date).toISOString().slice(0,10);
 		this.setState({loading: true});
 
-		fetch(API_URL, { method: 'get' })
+		fetch(`${API_URL}?country=US&date=${ISOdate}`, { method: 'get' })
 		.then(res => res.json())
-		.then(shows => this.setState({shows: shows, loading: false}))
+		.then(shows => this.setState({shows: shows, loading: false, canLoadMore: this.state.shows.length>3}))
 		.catch(err => this.setState({loading: false, error: err}))
 	};
 
@@ -33,7 +36,7 @@ class DaySchedule extends React.Component {
 		if ( !this.state.canLoadMore ) {
 			this.setState({ 
 				limit: 2,
-				canLoadMore: true
+				canLoadMore: this.state.shows.length>3
 			});
 			return
 		}
@@ -47,6 +50,13 @@ class DaySchedule extends React.Component {
 		if (this.state.limit+2 === this.state.shows.length) {
 			this.setState({ 
 				limit: this.state.limit+2,
+				canLoadMore: false
+			});
+			return
+		}
+		if (this.state.limit+1 === this.state.shows.length) {
+			this.setState({ 
+				limit: this.state.limit+1,
 				canLoadMore: false
 			});
 			return
@@ -75,11 +85,11 @@ class DaySchedule extends React.Component {
 	};
 
 	render() {
-		const {day, month, year } = this.props;
 		const { loading, shows, limit, canLoadMore } = this.state;
+		shows.filter(show => show !== null)
 		return (
 			<div className='day-schedule'>
-				<p className='date'>{ day } { MONTHS_MAP[month] } { year }</p>
+				<p className='date'>{ moment(this.props.date).locale('ru').format('LL') }</p>
 				{
 				loading ? <p>loading...</p>
 				:
@@ -91,15 +101,17 @@ class DaySchedule extends React.Component {
 									key={show.id}
 									title={show.show.name}
 									releaseDate={show.show.premiered}
-									imgUrl={show.show.image.medium}
-									bigImgUrl={show.show.image.original}
+									imgUrl={show.show.image ? show.show.image.medium : 'https://via.placeholder.com/80x110'}
+									bigImgUrl={show.show.image ? show.show.image.original : 'https://via.placeholder.com/300x440'}
 									season={show.season}
 									episode={show.number}
 								/>
 							))
 						}
 					</div>
+					{ this.state.shows.length > 2 ?
 					<button className='load-more' onClick={this.onButtonClick}>
+
 						{
 							canLoadMore ?
 							<span>
@@ -113,6 +125,8 @@ class DaySchedule extends React.Component {
 							</span>
 						}
 					</button>
+					: null
+					}
 				</div>
 				}
 			</div>

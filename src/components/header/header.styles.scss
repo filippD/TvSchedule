@@ -10,17 +10,22 @@ $header-height: 70px;
 	text-align: center;
 	
 	.back-icon {
+		position: absolute;
 		height: 100%;
 	    width: $icon-width;
 	    padding: 0 10px;
-	    float: left;
+	    left: 10px;
 	}
 
 	.logo {
 		font-size: 17px;
-		margin: 0 $icon-width 0 0;
+		margin: 0;
 		vertical-align: middle;
 		line-height: $header-height; 
+	}
+
+	.offset {
+		margin-right: $icon-width;
 	}
 }
 
