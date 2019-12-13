@@ -5,7 +5,8 @@
 
 	.image {
 		width: 80px;
-		padding: 5px 20px;
+		margin: 5px 20px;
+		box-shadow: 5px 5px 5px #c1c1c1;
 	}
 
 	.title {
@@ -24,5 +25,13 @@
 		color: grey;
 		padding: 10px 15px;
 		font-size: 15px
+	}
+	.big-img {
+		width: 80%;
+		position: fixed;
+		left: 50%;
+		margin-left: -150px;
+		top: 50%;
+		margin-top: -225px;
 	}
 }

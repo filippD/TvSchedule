@@ -4,4 +4,27 @@
 		text-align: center;
 		font-weight: bold;
 	}
+
+	.shows-schedule {
+		display: flex;
+	  	justify-content: center;
+	  	flex-direction: column;
+
+	  	.load-more {
+			margin: 0 30px;
+			padding: 10px 0;
+			background: white;
+			color: #696969;
+			border: 1px solid #696969;
+			border-radius: 5px;
+			font-size: 17px;
+
+			.arrow {
+				width: 15px;
+				height: 100%;
+				vertical-align: middle;
+				margin-left: 5px; 
+			}
+		}
+	}
 }
