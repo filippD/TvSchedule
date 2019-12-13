@@ -11,15 +11,13 @@ class DaySchedule extends React.Component {
 	render() {
 		return (
 			<div className='day-schedule'>
-				<div className='date'>
-					<span>{ this.props.day } { MONTHS_MAP[this.props.month] } { this.props.year }</span>
-				</div>
+				<p className='date'>{ this.props.day } { MONTHS_MAP[this.props.month] } { this.props.year }</p>
 				<div className='show-list'>
 					{
 						SCHEDULE.map(show => (
 							<Show 
 								title={show.show.name}
-								realeaseDate={show.show.premiered}
+								releaseDate={show.show.premiered}
 								imgUrl={show.show.image.medium}
 								season={show.season}
 								episode={show.number}

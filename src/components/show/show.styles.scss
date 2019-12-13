@@ -1,13 +1,28 @@
 .show {
 	display: flex;
-	justify-content: space-around;
-	padding: 20px;
+	justify-content: flex-start;
+	padding: 10px;
 
 	.image {
 		width: 80px;
+		padding: 5px 20px;
+	}
+
+	.title {
+		margin: 0 auto;
+		font-size: 17px;
+	}
+
+	.release-date {
+		font-size: 15px;
+		color: #696969;
+		margin: 0;
 	}
 
 	.season-episode-info {
 		background: #ececec;
+		color: grey;
+		padding: 10px 15px;
+		font-size: 15px
 	}
 }
