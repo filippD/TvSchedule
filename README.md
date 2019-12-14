@@ -1,4 +1,4 @@
-Mobile-first web app to display tv-shows schedule for a chosen date created as a test assignment.
+Mobile-first web app to display tv-shows' schedule for a chosen date. Created as a test assignment.
 
 ## Выполненые пункты задания
 
