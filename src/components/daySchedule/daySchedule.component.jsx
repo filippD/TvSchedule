@@ -28,44 +28,34 @@ class DaySchedule extends React.Component {
 
 		fetch(`${API_URL}?country=US&date=${ISOdate}`, { method: 'get' })
 		.then(res => res.json())
-		.then(shows => this.setState({shows: shows, loading: false, canLoadMore: this.state.shows.length>3}))
+		.then(shows => this.setState({shows: shows, loading: false}))
+		.then(res => this.setState({canLoadMore: this.state.shows.length>2}))
 		.catch(err => this.setState({loading: false, error: err}))
 	};
 
 	onButtonClick = () => {
-		if ( !this.state.canLoadMore ) {
+		const { canLoadMore, shows, limit } = this.state;
+
+		if ( !canLoadMore ) {
 			this.setState({ 
 				limit: 2,
-				canLoadMore: this.state.shows.length>3
+				canLoadMore: shows.length>2
+			})
+			return;
+		};
+		if (shows.length >= limit+2) {
+			const newLimit = limit+2
+			this.setState({
+				limit: newLimit,
+				canLoadMore: shows.length>newLimit
 			});
-			return
-		}
-		if (this.state.limit+3 === this.state.shows.length) {
-			this.setState({ 
-				limit: this.state.limit+3,
-				canLoadMore: false
+		} else {
+			const newLimit = limit+1
+			this.setState({
+				limit: newLimit,
+				canLoadMore: shows.length>newLimit
 			});
-			return
-		}
-		if (this.state.limit+2 === this.state.shows.length) {
-			this.setState({ 
-				limit: this.state.limit+2,
-				canLoadMore: false
-			});
-			return
-		}
-		if (this.state.limit+1 === this.state.shows.length) {
-			this.setState({ 
-				limit: this.state.limit+1,
-				canLoadMore: false
-			});
-			return
-		}
-		this.setState({ 
-				limit: this.state.limit+2,
-				canLoadMore: true
-		});
-		
+		};
 	};
 
 	getRightWord = () => {

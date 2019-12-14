@@ -25,7 +25,7 @@ class Show extends React.Component {
 				<div>
 					<p className='title'>{title}</p>
 					<p className='release-date'>{releaseDate.substring(0,4)}</p>
-					<p className='season-episode-info'>Season: {season} Episode: {episode}</p>
+					<p className='season-episode-info'>Сезон: {season} Эпизод: {episode}</p>
 				</div>
 				{ 
 				this.state.hidden ? null 
